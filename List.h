@@ -8,7 +8,7 @@
 #include <initializer_list>
 #include "Node.h"
 
-#include <nlohmann/json.hpp>
+#include <json.hpp>
 
 using json = nlohmann::json;
 
@@ -76,7 +76,6 @@ public:
 
     List(List<T> const &other) : head(nullptr), last(nullptr), listSize(0)
     {
-        this->listSize = other.listSize;
         Node<T> *current = other.head;
         while (current != nullptr)
         {
@@ -87,13 +86,14 @@ public:
 
     List<T> &operator=(List<T> const &other)
     {
-        this->listSize = other.listSize;
+        this->clear();
         Node<T> *current = other.head;
         while (current != nullptr)
         {
             this->push_back(current->value);
             current = current->next;
         }
+        return *this;
     }
 
     //! Calls the clear method, deleting it's contents
@@ -133,6 +133,29 @@ public:
     T operator[](const size_t position)
     {
         return at(position);
+    }
+
+    /*!
+     * \brief Searches the list for the given value (must have operator== defined), and if not found returns -1
+     * 
+     * \param searchVal value to be looked for
+     * \return int the index position of the value (if found, if not found it's just -1)
+     */
+    int find(const T searchVal)
+    {
+        Node<T> *current = head;
+
+        int position = -1;
+
+        for (int i = 0; i < this->length(); i++)
+        {
+            if (this->at(i) == searchVal)
+            {
+                position = i;
+                break;
+            }
+        }
+        return position;
     }
 
     // insert/delete
