@@ -338,6 +338,23 @@ public:
         current->value = newValue;
     }
 
+    /*!
+     * \brief Creates a new list, where it copies list1's contents and then adds list2 contents after list1's
+     * 
+     * \param list1 The initial list to be copied and added to
+     * \param list2 The list added on top of list1
+     * \return List<T> A new list comprised of the contents of both input lists
+     */
+    static List<T> cat(List<T> list1, List<T> list2)
+    {
+        List<T> newList(list1);
+        for (size_t i = 0; i < list2.length(); i++)
+        {
+            newList.push_back(list2[i]);
+        }
+        return newList;
+    }
+
     //! Empty out the contents of the list by calling pop_back() repeatedly
     void clear()
     {
@@ -354,7 +371,7 @@ public:
     * 
     * \return size_t length of the list
     */
-    size_t length()
+    size_t length() const
     {
         return this->listSize;
     }
@@ -401,6 +418,11 @@ public:
     // overload << for cout
     template <typename U>
     friend std::ostream &operator<<(std::ostream &, const List<U> &);
+
+    List<T> operator+(const List<T> other) const
+    {
+        return cat(*this, other);
+    }
 };
 
 /*!
