@@ -111,7 +111,7 @@ public:
     * \return T the element at the specified position 
     * \throws out_of_range if position is out of bounds (position >= length())
     */
-    T at(const size_t position)
+    T &at(const size_t position)
     {
         checkPos(position, "at()");
 
@@ -130,7 +130,7 @@ public:
     * \param position position of the element in the container
     * \return T the element at the specified position 
     */
-    T operator[](const size_t position)
+    T &operator[](const size_t position)
     {
         return at(position);
     }
