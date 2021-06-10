@@ -434,6 +434,11 @@ public:
     void print()
     {
         Node<T> *current = head;
+        if (current == nullptr)
+        {
+            std::cout << "[]" << std::endl;
+            return;
+        }
         std::cout << "[" << current->value;
         while (current->next != nullptr)
         {
@@ -493,6 +498,11 @@ template <typename U>
 std::ostream &operator<<(std::ostream &os, const List<U> &l)
 {
     Node<U> *current = l.head;
+    if (current == nullptr)
+    {
+        os << "[]";
+        return os;
+    }
     os << "[" << current->value;
     while (current->next != nullptr)
     {
