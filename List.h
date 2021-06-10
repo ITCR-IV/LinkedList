@@ -390,6 +390,18 @@ public:
         return *this;
     }
 
+    /*!
+     * \brief Concatenates the value on the right hand side to the list
+     * 
+     * \param right hand side value
+     * \return List<T> returns new list containing the result of concatenating the value to the list
+     */
+    List<T> &operator+=(const T &val)
+    {
+        this->push_back(val);
+        return *this;
+    }
+
     //! Empty out the contents of the list by calling pop_back() repeatedly
     void clear()
     {
